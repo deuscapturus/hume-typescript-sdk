@@ -46,42 +46,42 @@ jobs:
             - name: Run tests
               run: yarn test
 
-  release:
-    needs: [compile, test]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+    release:
+        needs: [compile, test]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
 
-      - name: Set up node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18.18.0"
+            - name: Set up node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18.18.0"
 
-      - name: Setup yarn
-        run: npm install -g yarn
+            - name: Setup yarn
+              run: npm install -g yarn
 
-      - name: Install dependencies
-        run: yarn install
+            - name: Install dependencies
+              run: yarn install
 
-      - name: Build the package
-        run: yarn build
+            - name: Build the package
+              run: yarn build
 
-      - name: Pack the module
-        run: npm pack --pack-destination .
+            - name: Pack the module
+              run: npm pack --pack-destination .
 
-      - name: Get version from package.json
-        id: get-version
-        run: echo "version=v$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+            - name: Get version from package.json
+              id: get-version
+              run: echo "version=v$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: Release ${{ steps.get-version.outputs.version }}
-          tag_name: ${{ steps.get-version.outputs.version }}
-          files: ./*.tgz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  name: Release ${{ steps.get-version.outputs.version }}
+                  tag_name: ${{ steps.get-version.outputs.version }}
+                  files: ./*.tgz
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     publish:
         needs: [compile, test]
