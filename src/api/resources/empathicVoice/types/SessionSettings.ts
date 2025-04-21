@@ -77,4 +77,9 @@ export interface SessionSettings {
      * Using this field, you can personalize responses based on session-specific details. For more guidance, see our [guide on using dynamic variables](/docs/empathic-voice-interface-evi/features/dynamic-variables).
      */
     variables?: Record<string, Hume.empathicVoice.SessionSettingsVariablesValue>;
+    /**
+     *  This will limit the number of history messages that are sent to a custom LLM.
+     * 
+     */
+    eventLimit?: number;
 }

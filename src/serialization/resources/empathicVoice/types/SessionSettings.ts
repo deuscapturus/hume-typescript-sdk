@@ -25,6 +25,7 @@ export const SessionSettings: core.serialization.ObjectSchema<
     tools: core.serialization.list(Tool).optional(),
     type: core.serialization.stringLiteral("session_settings"),
     variables: core.serialization.record(core.serialization.string(), SessionSettingsVariablesValue).optional(),
+    eventLimit: core.serialization.property("event_limit", core.serialization.number().optional()),
 });
 
 export declare namespace SessionSettings {
@@ -39,5 +40,6 @@ export declare namespace SessionSettings {
         tools?: Tool.Raw[] | null;
         type: "session_settings";
         variables?: Record<string, SessionSettingsVariablesValue.Raw> | null;
+        event_limit?: number | null;
     }
 }

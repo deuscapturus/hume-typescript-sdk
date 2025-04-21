@@ -651,6 +651,10 @@ types:
           session-specific details. For more guidance, see our [guide on using
           dynamic
           variables](/docs/empathic-voice-interface-evi/features/dynamic-variables).
+      eventLimit:
+        type: optional<integer>
+        docs: >-
+          The maximum number of chat history messages that will be included in a custom LLM integration request.
     source:
       openapi: evi-asyncapi.json
   Tool:
