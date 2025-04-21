@@ -79,7 +79,7 @@ export interface SessionSettings {
     variables?: Record<string, Hume.empathicVoice.SessionSettingsVariablesValue>;
     /**
      *  This will limit the number of history messages that are sent to a custom LLM.
-     * 
+     *
      */
     eventLimit?: number;
 }
